@@ -1,0 +1,64 @@
+/* src/components/Login.css */
+
+.main-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 140px;
+      padding: 60px;
+      /* background-color: black; */
+      box-shadow: #d51103;
+      width: 450px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+    }
+    
+    .login-container h2 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: rgba(8, 4, 4, 0.806);
+      
+    }
+    
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+    }
+    
+    .login-container input {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border: 1px solid #e70d0d;
+      border-radius: 5px;
+    }
+    
+    .login-container button {
+      padding: 10px;
+      font-size: 20px;
+      background-color: #0d56f6;
+      color: rgb(235, 235, 211);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+    
+    .login-container button:hover {
+      background-color: #5fbf0b;
+    }
+  
+    .signup-link{
+      color: #5fbf0b;
+      margin: 20px;
+    }
+    

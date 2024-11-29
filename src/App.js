@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './Navbar';
+import Dashboard from './Frontend/Dashboard';
+import Task from './Frontend/Task';
+import TaskList from './Frontend/TaskList';
+import Login from './Frontend/Login';
+import Signup from './Frontend/Signup';
+import { UserProvider } from './Frontend/UserContext';
 
-function App() {
+// Component to conditionally render Navbar
+const Layout = ({ children }) => {
+  const location = useLocation();
+  
+  // Conditionally hide Navbar on Login and Signup pages
+  const hideNavbar = location.pathname === '/' || location.pathname === '/signup';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {!hideNavbar && <Navbar />}
+      {children}
+    </>
   );
-}
+};
+
+const App = () => {
+  return (
+    <UserProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            
+            {/* Private Routes */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/task" element={<Task />} />
+            <Route path="/tasklist" element={<TaskList />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </UserProvider>
+  );
+};
 
 export default App;
