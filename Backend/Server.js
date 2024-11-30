@@ -13,19 +13,25 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json()); // Parse JSON
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Use routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
+// Root route for Render to detect
+app.get('/', (req, res) => {
+  res.send('Server is running and responding on the root route!');
+});
+
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error.message);
-    process.exit(1); // Exit process on database connection error
+    process.exit(1);
   });
 
 // Global error handler
@@ -34,13 +40,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start the server
-const PORT = process.env.PORT;
-
-app.get('/', (req, res) => {
-  res.send('Server is running and responding on the root route!');
-});
-
+// Start server
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
